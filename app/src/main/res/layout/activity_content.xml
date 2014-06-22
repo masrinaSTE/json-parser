@@ -5,21 +5,20 @@
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/blogpost_title"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="25dip"
+        android:textSize="20dip"
         android:textStyle="bold"
-        android:text="Title"/>
+        android:text="Title"
+        android:layout_margin="10dip"/>
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="fill_parent">
         <TextView
             android:id="@+id/blogpost_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="10dip"
             android:text="Content"/>
         </ScrollView>
-
-
-
 </LinearLayout>

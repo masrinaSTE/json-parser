@@ -13,5 +13,6 @@
         android:id="@+id/blog_content"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="10sp"/>
+        android:textSize="10sp"
+        android:visibility="gone"/>
 </LinearLayout>

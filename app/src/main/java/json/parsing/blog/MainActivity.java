@@ -51,8 +51,7 @@ public class MainActivity extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // getting value from selected item
                 String post_title = ((TextView) view.findViewById(R.id.post_title)).getText().toString();
-                String blog_content = ((TextView) view.findViewById(R.id.blog_content)).getText().toString();
-
+                String blog_content =  ((TextView) view.findViewById(R.id.blog_content)).getText().toString();
 
                 // Start activity_content
                 Intent i = new Intent(getApplicationContext(), BlogPostContent.class);
@@ -95,7 +94,7 @@ public class MainActivity extends ListActivity {
                         String id = object.getString(TAG_ID);
                         String title = object.getString(TAG_TITLE);
                         String content = object.getString(TAG_CONTENT);
-
+                        String replaceContent = content.replaceAll("\n", "<br>");
                         // temporary HashMap for single post
                         HashMap<String, String> post = new HashMap<String, String>();
                         Log.i("type", type);
@@ -103,7 +102,7 @@ public class MainActivity extends ListActivity {
                         // add each value to HashMap key => value
                         post.put(TAG_ID, id);
                         post.put(TAG_TITLE, title);
-                        post.put(TAG_CONTENT, content);
+                        post.put(TAG_CONTENT, replaceContent);
 
                         // add post to postList
                         if(type.contains("post")) {

@@ -1,19 +1,22 @@
 package json.parsing.blog;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.text.Html;
-import android.view.View;
+import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-
 /**
  * Created by masrina on 6/20/14.
  * implementation of Html.ImageGetter.
@@ -22,15 +25,16 @@ import java.net.MalformedURLException;
  */
 public class URLImageParser implements Html.ImageGetter {
     Context context;
-    View container;
+    TextView container;
 
     // will execute AsyncTask and refresh the container
-    public URLImageParser(View view, Context c){
+    public URLImageParser(TextView view, Context c){
         this.context = c;
         this.container = view;
     }
 
     public Drawable getDrawable(String source){
+
         URLDrawable urlDrawable = new URLDrawable();
 
         // get the actual source
@@ -64,22 +68,35 @@ public class URLImageParser implements Html.ImageGetter {
             // redraw the image by invalidating the container
             URLImageParser.this.container.invalidate();
 
+            // For ICS
+            URLImageParser.this.container.setHeight((URLImageParser.this.container.getHeight()
+            + result.getIntrinsicHeight()));
+
+            // pre ICS
+            URLImageParser.this.container.setEllipsize(null);
 
         }
         // Get the drawable from URL
         public Drawable fetchDrawable(String urlString){
             try{
+//                InputStream inputStream = fetch(urlString);
                 InputStream inputStream = fetch(urlString);
 
-//                BufferedInputStream bufferedInputStream =
-//                        new BufferedInputStream(inputStream);
-//                Bitmap bm = BitmapFactory.decodeStream(bufferedInputStream);
-//
-//                // convert Bitmap to Drawable
-//                Drawable drawable = new BitmapDrawable( getResources(), bm);
+                BufferedInputStream bufferedInputStream =
+                        new BufferedInputStream(inputStream);
+                Bitmap bm = BitmapFactory.decodeStream(bufferedInputStream);
+                bufferedInputStream.close();
 
-                Drawable drawable = Drawable.createFromStream(inputStream, "src");
-                drawable.setBounds(0, 0, 0 + drawable.getIntrinsicWidth(), 0 + drawable.getIntrinsicHeight());
+//                Drawable d = new BitmapDrawable(bm);
+//                d.setId("1");
+//                TextView textView;
+//                textView.setCompoundDrawablesWithIntrinsicBounds(0 , 0, 1, 0);
+//
+                // convert Bitmap to Drawable
+                Drawable drawable = new BitmapDrawable( context.getResources(), bm);
+
+//                Drawable drawable = Drawable.createFromStream(inputStream, "src");
+                drawable.setBounds(2, 2, 0 + drawable.getIntrinsicWidth(), 0 + drawable.getIntrinsicHeight());
                 return drawable;
             }catch (Exception e){
                 return null;
