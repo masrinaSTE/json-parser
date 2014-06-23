@@ -25,7 +25,7 @@ import java.util.HashMap;
 
 public class MainActivity extends ListActivity {
     private ProgressDialog progressDialog;
-    private static String url = "http://chinwyejin.com/wp_api/v1/posts";
+    private static String url = "http://chinwyejin.com/wp_api/v1/posts?per_page=20&post_type=post";
     private final static String TAG_POST = "posts";
     private final static String TAG_ID = "id";
     private final static String TAG_TYPE = "type";
