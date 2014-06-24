@@ -7,10 +7,13 @@
         android:id="@+id/blogpost_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dip"
+        android:text="Blog Post Title"
+        android:layout_margin="10dip"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:text="Title"
-        android:layout_margin="10dip"/>
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:paddingLeft="10dp"/>
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
@@ -19,6 +22,9 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_margin="10dip"
-            android:text="Content"/>
+            android:text="Content"
+            android:textSize="10sp"
+            android:ellipsize="end"
+            android:paddingLeft="10dp"/>
         </ScrollView>
 </LinearLayout>
